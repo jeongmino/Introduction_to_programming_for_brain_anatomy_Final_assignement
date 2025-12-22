@@ -87,3 +87,33 @@ def compute_spectrogram(
     return f[freq_mask], t, Sxx[freq_mask, :]
 
 
+def compute_condition_means(
+    data: np.ndarray,
+    low_idx: list[int],
+    high_idx: list[int],
+    config: LFPConfig,
+    baseline: bool = True
+):
+    """
+    Compute baseline-corrected mean LFP for low/high tone.
+    """
+    low_trials = data[low_idx]
+    high_trials = data[high_idx]
+
+    low_mean = np.mean(low_trials, axis=0)
+    high_mean = np.mean(high_trials, axis=0)
+
+    if baseline:
+        low_mean = baseline_correct(low_mean, config)
+        high_mean = baseline_correct(high_mean, config)
+
+    return low_mean, high_mean
+
+
+def compute_session_average(
+    session_means: list[np.ndarray]
+) -> np.ndarray:
+    """
+    Average across sessions.
+    """
+    return np.mean(np.stack(session_means), axis=0)
