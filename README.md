@@ -24,3 +24,32 @@ The repository is organized as follows:
 
 - `README.md`  
   Provides an overview of the project, installation instructions, and usage examples.
+
+
+## Installation Instructions
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <repository-name>
+
+2. Create a virtual enviornment
+  python -m venv venv
+  source venv/bin/activate
+
+3. Install required dependecies
+   pip install -r requirements.txt
+
+4. Verify installation by running one of the provided scripts or notebooks
+
+   ## 4️⃣ Usage Examples (실행 예시 필수)
+
+  ## Usage Examples
+
+  After installation, the project can be used in the following ways:
+
+  ### Running the main script
+  ```bash
+  python src/main.py
+
+
