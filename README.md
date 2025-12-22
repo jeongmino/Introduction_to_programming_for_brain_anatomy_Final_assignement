@@ -5,6 +5,7 @@
 This project was developed as part of the BRI 519 course to demonstrate core concepts in data processing, analysis, and reproducible computational workflows. The goal of the project is to provide a structured and well-documented codebase that can be easily understood, executed, and extended by other users.
 
 The project emphasizes clarity, modular design, and reproducibility, making it suitable for both educational and experimental purposes.
+This project was developed and tested with Python 3.11.
 
 ## Repository Structure
 
