@@ -1,14 +1,9 @@
-# analysis/preprocessing.py
-
 import numpy as np
 from scipy.signal import butter, filtfilt
 
 
-# --------------------------------------------------
-# Outlier detection
-# --------------------------------------------------
 
-def detect_outliers(
+def detect_outliers(                                                    # Outlier detection
     lfp_trials: np.ndarray,
     fs: float,
     baseline_duration_sec: float,
@@ -55,11 +50,7 @@ def detect_outliers(
     return good_rms & good_ptp
 
 
-# --------------------------------------------------
-# Filtering
-# --------------------------------------------------
-
-class LowpassFilter:
+class LowpassFilter:                                                    # Filtering
     """
     Low-pass filter for LFP signals.
     """

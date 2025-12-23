@@ -1,5 +1,3 @@
-# analysis/data_loader.py
-
 import numpy as np
 from scipy.io import loadmat
 
@@ -27,9 +25,7 @@ class MouseLFPData:
         self.n_sessions = self._data.shape[0]
         self.n_fields = self._data.shape[1]
 
-    # --------------------------------------------------
-    # Core accessors
-    # --------------------------------------------------
+    ### Core accessors
 
     def get_lfp(self, session: int) -> np.ndarray:
         """
@@ -47,9 +43,8 @@ class MouseLFPData:
         """
         return self._data[session, 4].flatten()
 
-    # --------------------------------------------------
-    # Convenience methods
-    # --------------------------------------------------
+
+    ### Convenience methods
 
     def get_unique_tones(self, session: int) -> np.ndarray:
         """
@@ -69,9 +64,9 @@ class MouseLFPData:
         """
         return self.get_lfp(session).shape[1]
 
-    # --------------------------------------------------
-    # Tone-based indexing
-    # --------------------------------------------------
+
+    ### Tone-based indexing
+
 
     def get_tone_indices(self, session: int, tone_value: float,
                          good_mask: np.ndarray | None = None) -> np.ndarray:

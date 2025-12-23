@@ -1,12 +1,10 @@
-# analysis/analysis.py
-
 import numpy as np
 from scipy.signal import spectrogram
 from analysis.config import LFPConfig
 
-# --------------------------------------------------
-# Mean LFP analysis
-# --------------------------------------------------
+
+### Mean LFP analysis
+
 
 def compute_mean_lfp(
     lfp_trials: np.ndarray,
@@ -33,9 +31,7 @@ def compute_mean_lfp(
     return np.mean(lfp_trials[trial_indices], axis=0)
 
 
-# --------------------------------------------------
-# Spectral analysis
-# --------------------------------------------------
+### Spectral analysis
 
 def compute_spectrogram(
     signal: np.ndarray,

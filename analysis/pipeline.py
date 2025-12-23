@@ -1,5 +1,3 @@
-# analysis/pipeline.py
-
 import numpy as np
 
 from analysis.config import LFPConfig
@@ -42,35 +40,21 @@ def run_pipeline(mat_file: str):
         order=config.filter_order,
     )
 
-    for session in range(data.n_sessions):
-        # ------------------------------------------
-        # Load raw data
-        # ------------------------------------------
+    for session in range(data.n_sessions):                      # Load raw data
         lfp_trials = data.get_lfp(session)
         tones = data.get_tones(session)
-
-        # ------------------------------------------
-        # Outlier rejection
-        # ------------------------------------------
-        good_mask = detect_outliers(
+        good_mask = detect_outliers(                             # Outlier rejection
             lfp_trials=lfp_trials,
             fs=config.fs,
             baseline_duration_sec=config.baseline_duration_sec,
             rms_threshold=config.rms_threshold,
             ptp_threshold=config.ptp_threshold,
-        )
-
-        # ------------------------------------------
-        # Filtering
-        # ------------------------------------------
-        filtered_trials = apply_filter_to_trials(
+        )        
+        filtered_trials = apply_filter_to_trials(                 # Filtering
             lfp_trials,
             lowpass_filter
         )
-
-        # ------------------------------------------
-        # Tone-based trial selection
-        # ------------------------------------------
+                                                                  # Tone-based trial selection
         unique_tones = np.unique(tones)
         session_results = {}
 
@@ -84,18 +68,12 @@ def run_pipeline(mat_file: str):
             if len(trial_indices) == 0:
                 continue
 
-            # --------------------------------------
-            # Mean LFP
-            # --------------------------------------
-            mean_lfp = compute_mean_lfp(
+            mean_lfp = compute_mean_lfp(                           # Mean LFP
                 filtered_trials,
                 trial_indices
             )
 
-            # --------------------------------------
-            # Spectrogram
-            # --------------------------------------
-            f, t, Sxx = compute_spectrogram(
+            f, t, Sxx = compute_spectrogram(                       # Spectrogram
                 signal=mean_lfp,
                 fs=config.fs,
                 max_freq=config.max_analysis_freq,

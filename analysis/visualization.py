@@ -1,6 +1,5 @@
-# analysis/visualization.py
-
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 from analysis.config import LFPConfig
 
@@ -53,27 +52,59 @@ def plot_spectrogram(
 def plot_low_high_overlay(
     low_mean,
     high_mean,
-    session_id: int,
-    config: LFPConfig
+    session_id,
+    config,
+    output_dir="output"
 ):
+    os.makedirs(output_dir, exist_ok=True)
+
     plt.figure(figsize=(10, 4))
     plt.plot(low_mean, label="Low tone", color="blue")
     plt.plot(high_mean, label="High tone", color="red")
 
-    # stimulus onset
+    # Stimulus onset marker
     plt.axvline(
         x=config.stim_onset_sample,
-        color="k",
+        color="black",
         linestyle="--",
         label="Stimulus onset"
     )
 
-    plt.title(f"Session {session_id} – Low vs High Tone")
     plt.xlabel("Time (samples)")
     plt.ylabel("Amplitude")
+    plt.title(f"Session {session_id}: Low vs High Tone LFP")
     plt.legend()
-    plt.tight_layout()
-    plt.show()
+
+    filename = f"{output_dir}/session_{session_id}_low_high.png"
+    plt.savefig(filename, dpi=150)
+    plt.close()
+
+    return filename
+
+# def plot_low_high_overlay(
+#     low_mean,
+#     high_mean,
+#     session_id: int,
+#     config: LFPConfig
+# ):
+#     plt.figure(figsize=(10, 4))
+#     plt.plot(low_mean, label="Low tone", color="blue")
+#     plt.plot(high_mean, label="High tone", color="red")
+
+#     # stimulus onset
+#     plt.axvline(
+#         x=config.stim_onset_sample,
+#         color="k",
+#         linestyle="--",
+#         label="Stimulus onset"
+#     )
+
+#     plt.title(f"Session {session_id} – Low vs High Tone")
+#     plt.xlabel("Time (samples)")
+#     plt.ylabel("Amplitude")
+#     plt.legend()
+#     plt.tight_layout()
+#     plt.show()
 
 
 def plot_session_consistency(
