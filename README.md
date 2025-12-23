@@ -97,7 +97,10 @@ without any additional user input.
 The following command runs the container and saves all output figures
 to the local output/ directory using volume mounting:
 
+'mkdir -p output' for result directory
+
 ```bash
+mkdir -p output
 docker run --rm -v $(pwd)/output:/app/output lfp-analysis
 ```
 
@@ -121,6 +124,7 @@ To run the analysis directly from Docker Hub without building the image locally,
 use the following command:
 
 ```bash
+mkdir -p output
 docker run --rm -v $(pwd)/output:/app/output jeongmino/lfp-analysis:final
 ```
 
